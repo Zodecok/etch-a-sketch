@@ -5,6 +5,14 @@ function resetBox() {
 
 }
 
+// function hovered(e) {
+    // e.target.classList.add("hovered");
+// }
+
+// function left(e) {
+// e.target.classList.remove
+// }
+
 function createEtch(num) {
     let boxContainer = document.querySelector(".boxContainer");
 
@@ -15,6 +23,12 @@ function createEtch(num) {
         for (let count = 0; count < num; count++) {
             let box = document.createElement("div");
             box.classList.add("box");
+            box.addEventListener("mouseenter", function hovered(e) {
+                e.target.classList.add("hovered");
+            });
+            box.addEventListener("mouseleave", function left(e) {
+                e.target.classList.remove("hovered");
+            });
             rowContainer.appendChild(box);
         }
         boxContainer.appendChild(rowContainer);
@@ -39,3 +53,4 @@ function active(e) {
 
 let button = document.getElementById("numOfSidesButton");
 button.addEventListener("click", active);
+
