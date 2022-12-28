@@ -25,10 +25,12 @@ function createEtch(num) {
             box.classList.add("box");
             box.addEventListener("mouseenter", function hovered(e) {
                 e.target.classList.add("hovered");
-            });
-            box.addEventListener("mouseleave", function left(e) {
-                e.target.classList.remove("hovered");
-            });
+                console.log(e.target);
+                e.target.style["background"] = `rgb(${randomValue()}, ${randomValue()}, ${randomValue()})`;
+            }, {once: true});
+            // box.addEventListener("mouseleave", function left(e) {
+            //     e.target.classList.remove("hovered");
+            // });
             rowContainer.appendChild(box);
         }
         boxContainer.appendChild(rowContainer);
@@ -37,11 +39,15 @@ function createEtch(num) {
 
 function getNum() {
     let sides = document.getElementById("numOfSidesInput").value;
-    document.getElementById("numOfSidesInput").value = ""; // reset input
     Number.parseInt(sides);
+    
+    if (sides > 100) {
+        return 100;
+    }
     if (sides < 0 || isNaN(sides)) {
         return 0;
     }
+    document.getElementById("numOfSidesInput").value = ""; // reset input
     return sides;
 }
 
@@ -49,6 +55,12 @@ function active(e) {
     let sides = getNum();
     resetBox();
     createEtch(sides);
+}
+
+function randomValue() {
+    // Returns a random value between 0 and 255
+    // Math.floor(Math.random() * (max - min + 1)) + min
+    return Math.floor(Math.random() * 256);
 }
 
 let button = document.getElementById("numOfSidesButton");
